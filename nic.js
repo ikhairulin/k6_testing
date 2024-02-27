@@ -11,15 +11,22 @@ let jsonAuth = new SharedArray("auth", function() {
 	return JSON.parse(open('./auth.json')).accs;
 });
 
+let jsonAddr = new SharedArray("email", function() {
+	return JSON.parse(open('./email.json')).address;
+});
 
 export default function main() {
 
   let loginInfo = randomItem(jsonAuth);
+  let emailInfo = randomItem(jsonAddr);
 
   const login = loginInfo.login
   const pass = loginInfo.pass
   console.log('Логин - ' + login)
   console.log('Пароль - ' + pass)
+
+  const email = emailInfo.email
+  console.log('Адресат - ' + email)
 
   let response
   let reg_token
@@ -332,7 +339,7 @@ console.log(checkAuth)
           _id: compose_id,
           _attachments: '',
           _from: '6324393',
-          _to: 'ikhairulin@gmail.com',
+          _to: email,
           _cc: '',
           _bcc: '',
           _replyto: '',
